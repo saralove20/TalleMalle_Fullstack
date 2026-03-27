@@ -1,0 +1,37 @@
+version: '3.8'
+
+services:
+  db:
+    image: mariadb:latest
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./db:/var/lib/mysql
+    environment:
+      - MARIADB_DATABASE=tallemalle_backend
+      - MARIADB_ROOT_PASSWORD=qwer1234
+    restart: always
+
+  backend:
+    build:
+      context: ./TalleMalle_Backend
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    env_file:
+      - ./TalleMalle_Backend/.env  # 백엔드 폴더 안의 .env 파일을 통째로 읽음
+    environment:
+      - DB_URL=jdbc:mariadb://db:3306/tallemalle_backend # 파일 내용 중 덮어쓸 것만 명시
+    depends_on:
+      - db
+
+  frontend:
+    build:
+      context: ./TalleMalle_Frontend
+      dockerfile: Dockerfile
+      args:
+        - VITE_BACKEND_URL=/api
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
