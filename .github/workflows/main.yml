@@ -19,6 +19,7 @@ jobs:
       - name: Build with Gradle
         run: |
           chmod +x ./gradlew
+          working-directory: ./TalleMalle_Backend
           ./gradlew clean bootJar
 
       - name: Docker Login
