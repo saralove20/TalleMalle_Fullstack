@@ -9,6 +9,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class DeploymentController {
     @GetMapping("/test")
     public void test() {
-        System.out.println("blue v5");
+        System.out.println("green v6");
     }
 }
