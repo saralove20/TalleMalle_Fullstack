@@ -18,7 +18,6 @@
 #ENTRYPOINT ["java", "-jar", "app.jar"]
 
 FROM  openjdk:17-ea-17-slim
-ARG JAR_FILE
-COPY ${JAR_FILE}  app.jar
+COPY  ./build/libs/TalleMalle_Backend-0.0.1-SNAPSHOT.jar app.jar
 EXPOSE 8080
 ENTRYPOINT ["java", "-jar", "app.jar"]

@@ -8,7 +8,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/deploy")
 public class DeploymentController {
     @GetMapping("/test")
-    public void test() {
+    public String test() {
         System.out.println("green v6");
+        return "green v6";
     }
 }
