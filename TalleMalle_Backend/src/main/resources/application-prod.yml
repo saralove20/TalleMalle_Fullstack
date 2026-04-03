@@ -37,18 +37,18 @@ management:
 #  otlp:
 #    tracing:
 #      endpoint: http://<예거-서버-IP>:4318/v1/traces # 예거 수집 서버 주소
-
-server:
-  port: 443
-  error:
-    whitelabel:
-      enabled: false  # 기본 whitelabel 에러 페이지 비활성화
-    path: /error
-  ssl:
-    enabled: true
-    key-store: file:./keystore.p12
-    key-store-type: "PKCS12"
-    key-store-password: ${SSL_KEY_PASS}
+#
+#server:
+#  port: 443
+#  error:
+#    whitelabel:
+#      enabled: false  # 기본 whitelabel 에러 페이지 비활성화
+#    path: /error
+#  ssl:
+#    enabled: true
+#    key-store: file:./keystore.p12
+#    key-store-type: "PKCS12"
+#    key-store-password: ${SSL_KEY_PASS}
 
 spring:
   application:
