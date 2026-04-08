@@ -87,7 +87,7 @@ public class SecurityConfig {
                         .requestMatchers("/swagger-ui/**", "/v3/api-docs/**", "/ws/**").permitAll()
 
                         // 2. 공지사항 (Read는 전체 허용, Write/Update/Delete는 인증 필요)
-                        .requestMatchers(HttpMethod.GET, "/notices/**").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/notices/**", "/deploy/test").permitAll()
                         .requestMatchers("/notices/**").authenticated()
 
                         // 3. 예외적인 인증 필요 경로 (중요: 전체 허용 패턴보다 위에 위치해야 함)

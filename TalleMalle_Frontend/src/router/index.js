@@ -105,7 +105,6 @@ const router = createRouter({
 router.beforeEach(async (to, from, next) => {
   const authStore = useAuthStore()
   const driverStore = useDriverStore()
-  const recruitStore = useRecruitStore()
 
   // 드라이버 전용 라우트: 승객용 /profile/me 를 호출하지 않음 (드라이버 JWT면 401 → 인증 복구 실패)
   if (to.meta.requiresDriver) {
@@ -120,11 +119,14 @@ router.beforeEach(async (to, from, next) => {
   if (!authStore.user && to.meta.requiresAuth) {
     try {
       const res = await userApi.getMe()
-      const profileRes = await profileApi.profile()
-      if (res.data) {
+      if (res.data && typeof res.data === 'object' && res.data.email) {
+        const profileRes = await profileApi.profile()
         authStore.login(res.data)
         authStore.updateUser(profileRes.data.result)
         console.log('새로고침 시 authStore 유저정보', authStore.user)
+      } else {
+        authStore.logout()
+        return
       }
     } catch (error) {
       console.error('인증 복구 실패:', error)
@@ -132,6 +134,7 @@ router.beforeEach(async (to, from, next) => {
       if (!driverStore.driver) {
         authStore.logout()
       }
+      return
     }
   }
 

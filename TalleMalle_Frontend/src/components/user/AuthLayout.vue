@@ -23,9 +23,6 @@ defineProps({
 <template>
   <div class="signup-container">
     <div class="signup-card">
-      <div class="pt-8 text-center">
-        <h1 class="text-3xl font-semibold text-blue-700">무중단 배포 Blue v4</h1>
-      </div>
       <div class="p-8 pb-4 flex flex-col items-center text-center">
         <div class="flex items-center gap-2 mb-6">
           <div class="bg-indigo-600 p-2.5 rounded-2xl shadow-lg shadow-indigo-100 logo-bounce">

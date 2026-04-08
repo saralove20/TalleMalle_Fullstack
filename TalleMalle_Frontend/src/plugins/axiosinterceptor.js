@@ -7,9 +7,13 @@ const api = axios.create({
 })
 
 api.interceptors.request.use(
-  (config) => {
+  (response) => {
     // console.log('요청 보내기 전에 실행')
-    return config
+    // 응답 데이터가 문자열이고 "<!DOCTYPE"으로 시작한다면 에러로 처리
+    if (typeof response.data === 'string' && response.data.includes('<!DOCTYPE html>')) {
+      return Promise.reject(new Error('API 응답이 올바르지 않습니다. (HTML 수신)'))
+    }
+    return response
   },
   (error) => {
     // console.log('요청 보낼 때 에러 발생')
